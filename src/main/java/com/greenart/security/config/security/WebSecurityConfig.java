@@ -33,9 +33,7 @@ public class WebSecurityConfig {
                 * 각 엔드포인트에 대한 인증 규칙 설정
                 * */
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/feed", "/api/feed/**").authenticated() //로그인이 되어 있어야만 사용 가능
-//                                .requestMatchers(HttpMethod.GET,"/api/user").authenticated()
-                                .requestMatchers(HttpMethod.PATCH,"/api/user/pic").authenticated()
+                        req.requestMatchers(HttpMethod.GET,"/api/user").authenticated() //로그인이 되어 있어야만 사용 가능
                                 .anyRequest().permitAll() //나머지 요청은 모두 허용
                 )
                 // 인증 실패 시 핸들링 설정

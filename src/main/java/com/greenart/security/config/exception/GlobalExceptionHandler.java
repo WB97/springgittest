@@ -13,7 +13,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +54,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleExpiredJwtException() {
 //        return handleExceptionInternal(UserErrorCode.EXPIRED_TOKEN);
         log.info("ExpiredJwtException - handlerException");
+        return handleExceptionInternal(CommonErrorCode.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleNoResourceFoundException(NoResourceFoundException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         return handleExceptionInternal(CommonErrorCode.INTERNAL_SERVER_ERROR);
     }
 
