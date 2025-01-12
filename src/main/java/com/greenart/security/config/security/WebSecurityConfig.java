@@ -34,7 +34,7 @@ public class WebSecurityConfig {
                 * */
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/api/feed", "/api/feed/**").authenticated() //로그인이 되어 있어야만 사용 가능
-                                .requestMatchers(HttpMethod.GET,"/api/user").authenticated()
+//                                .requestMatchers(HttpMethod.GET,"/api/user").authenticated()
                                 .requestMatchers(HttpMethod.PATCH,"/api/user/pic").authenticated()
                                 .anyRequest().permitAll() //나머지 요청은 모두 허용
                 )
