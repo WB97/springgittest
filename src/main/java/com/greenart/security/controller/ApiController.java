@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
@@ -25,6 +26,7 @@ import java.util.Set;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class ApiController {
 
     private final ObjectMapper objectMapper;
@@ -35,7 +37,7 @@ public class ApiController {
         this.apiKey = apiKey;
     }
 
-    @GetMapping("/api/load")
+    @GetMapping("/load")
     public ResponseEntity<Object> loadJson()  {
         String result = "";
         String baseUrl = "https://api.odcloud.kr/api/3074462/v1/uddi:161740bd-8ec5-4734-9a3d-f7a2cde34942";
@@ -67,5 +69,12 @@ public class ApiController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("OK");
+    }
+
+    @GetMapping("/csv")
+    public ResponseEntity<String> readCsv() {
+        CsvReader csvReader = new CsvReader();
+        csvReader.read();
+        return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 }
