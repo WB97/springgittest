@@ -1,4 +1,4 @@
-package com.greenart.security.controller;
+package com.greenart.security.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
