@@ -37,6 +37,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	// db
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
 	// jjwt
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
