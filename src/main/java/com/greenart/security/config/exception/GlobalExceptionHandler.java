@@ -57,10 +57,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(CommonErrorCode.INTERNAL_SERVER_ERROR);
     }
 
-    @Override
-    protected ResponseEntity<Object> handleNoResourceFoundException(NoResourceFoundException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        return handleExceptionInternal(CommonErrorCode.INTERNAL_SERVER_ERROR);
-    }
+//    @Override
+//    protected ResponseEntity<Object> handleNoResourceFoundException(NoResourceFoundException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+//        return handleExceptionInternal(CommonErrorCode.INTERNAL_SERVER_ERROR);
+//    }
 
     private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode) {
         return handleExceptionInternal(errorCode, null);
