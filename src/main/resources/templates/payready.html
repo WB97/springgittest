@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kakao Pay</title>
+</head>
+<body>
+<h1>카카오 페이 테스트</h1>
+<form method="post" th:action="@{/api/kakao-pay}">
+    <button type="submit">결제하기1</button>
+</form>
+<button id="payButton">결제하기2</button>
+</body>
+<script>
+    document.getElementById("payButton").addEventListener("click", function () {
+        // 폼 생성
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/api/kakao-pay";
+        form.target = "payPopup"; // 팝업 창 타겟 이름
+
+        // 추가 데이터가 필요할 경우 hidden input으로 전달 가능
+        const inputData = document.createElement("input");
+        inputData.type = "hidden";
+        inputData.name = "exampleData";
+        inputData.value = "testValue";
+        form.appendChild(inputData);
+
+        // 페이지에 폼 추가 (눈에 보이지 않음)
+        document.body.appendChild(form);
+
+        // 팝업 창 열기
+        window.open("", "payPopup", "width=600,height=900");
+
+        // 폼 제출
+        form.submit();
+
+        // 기존 창 경로 변경
+        window.location.href = "/api/pay-wait";
+    });
+</script>
+</html>

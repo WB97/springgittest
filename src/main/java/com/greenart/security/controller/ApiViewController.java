@@ -18,7 +18,7 @@ public class ApiViewController {
 
     @GetMapping("/kakao-pay")
     public String getKakaoPay() {
-        return "kakaoPay";
+        return "payready";
     }
 
     @PostMapping("/kakao-pay")
@@ -26,10 +26,18 @@ public class ApiViewController {
         return "redirect:" + kakaoService.kakaoPayReady();
     }
 
+    @GetMapping("/pay-wait")
+    public String payWait() {
+        return "paywait";
+    }
+
     @GetMapping("/approve")
-    @ResponseBody
     public String payApprove(@RequestParam("pg_token") String pgToken) {
-        String result = kakaoService.approve(pgToken);
-        return result;
+        return "redirect:" + kakaoService.approve(pgToken);
+    }
+
+    @GetMapping("/complete")
+    public String payComplete() {
+        return "closepay";
     }
 }

@@ -22,7 +22,7 @@ public class KakaoService {
     private final String affiliateCode;
     private final String secretKey;
 
-    public KakaoService(@Value("${api.kakao-secretKey}") String secretKey,
+    public KakaoService(@Value("${api.kakao-secret-key}") String secretKey,
                         @Value("${api.kakao-affiliate-code}") String affiliateCode
     ) {
         this.affiliateCode = affiliateCode;
@@ -92,11 +92,11 @@ public class KakaoService {
             KakaoApproveDto approveDto = restTemplate.postForObject(new URI(payUrl + "/online/v1/payment/approve"), body, KakaoApproveDto.class);
             log.info("approveDto = {}", approveDto);
             if(approveDto != null) {
-                return approveDto.getAid();
+                return "closepay";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/pay";
+        return "pay";
     }
 }
