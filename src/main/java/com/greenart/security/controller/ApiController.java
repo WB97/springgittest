@@ -25,13 +25,19 @@ import java.nio.charset.StandardCharsets;
 public class ApiController {
 
     private final ObjectMapper objectMapper;
-    private final String apiKey;
+    private final String filePath;
+    private final CsvWriterAndReader csvWriterAndReader;
+//    private final String apiKey;
 
     public ApiController(ObjectMapper objectMapper,
-                         @Value("${api.AuthKey}")String apiKey
+                         @Value("${file.path}") String filePath,
+                         CsvWriterAndReader csvWriterAndReader
+//                         @Value("${api.AuthKey}")String apiKey
     ) {
         this.objectMapper = objectMapper;
-        this.apiKey = apiKey;
+        this.filePath = filePath;
+        this.csvWriterAndReader = csvWriterAndReader;
+//        this.apiKey = apiKey;
     }
 
     @GetMapping("/convert")
@@ -79,15 +85,13 @@ public class ApiController {
 
     @GetMapping("/csv-read")
     public ResponseEntity<String> readCsv() {
-        CsvWriterAndReader csvReader = new CsvWriterAndReader();
-        csvReader.insCsv();
+        csvWriterAndReader.read();
         return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 
     @GetMapping("/csv-write")
     public ResponseEntity<String> writeCsv() {
-        CsvWriterAndReader csvReader = new CsvWriterAndReader();
-//        csvReader.write();
+        csvWriterAndReader.insCsv();
         return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 }

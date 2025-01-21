@@ -15,7 +15,7 @@ public class StrfDto {
     private final double lat;
     private final double lng;
     private final String address;
-    private final String locationId;
+    private final long locationId;
     private final String post;
     private final String tell;
     private final String startAt;

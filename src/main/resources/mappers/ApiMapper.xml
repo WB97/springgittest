@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.greenart.security.mapper.ApiMapper">
+    <insert id="insStrf">
+        INSERT INTO stay_tour_restaur_fest
+        (strf_id, category, title, lat, lng, address, location_id,
+            post, tell, start_at, end_at, `open`, `close`, rest_date,
+            `explain`, detail, busi_num)
+        VALUES
+        <foreach collection="dtoList" item="item" separator=",">
+            (#{item.strfId}, #{item.category}, #{item.title}, #{item.lat}, #{item.lng}, #{item.address}, #{item.locationId}, #{item.post}, #{item.tell},
+            #{item.startAt}, #{item.endAt}, #{item.open}, #{item.close}, #{item.restDate}, #{item.explain}, #{item.detail}, #{item.busiNum})
+        </foreach>
+    </insert>
+
+    <insert id="insBusiNum">
+        INSERT INTO business_num
+        (busi_num, user_id)
+        VALUES
+        <foreach collection="dtoList" item="item" separator=",">
+            (#{item.busiNum}, #{item.userId})
+        </foreach>
+    </insert>
+</mapper>
