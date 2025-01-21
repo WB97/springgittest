@@ -80,7 +80,7 @@ public class ApiController {
     @GetMapping("/csv-read")
     public ResponseEntity<String> readCsv() {
         CsvWriterAndReader csvReader = new CsvWriterAndReader();
-        csvReader.read();
+        csvReader.insCsv();
         return ResponseEntity.status(HttpStatus.OK).body("OK");
     }
 
