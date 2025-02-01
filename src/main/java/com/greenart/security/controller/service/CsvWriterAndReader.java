@@ -7,6 +7,7 @@ import com.greenart.security.model.p2.StrfDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +36,7 @@ public class CsvWriterAndReader {
         }
     }
 
+    @Transactional
     public void insCsv() {
         try {
             List<StrfDto> strfDtoList = new ArrayList<>();
@@ -52,33 +54,31 @@ public class CsvWriterAndReader {
         File file = new File(filePath + filename + ".csv");
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         String line = "";
-//        br.readLine(); // csv 1열 데이터를 header 로 인식
+        br.readLine(); // csv 1열 데이터를 header 로 인식
 
 
         while ((line = br.readLine()) != null) {
             String[] list = line.split(",");
-            System.out.println(list[0]);
             strfDtoList.add(StrfDto.builder()
-                    .strfId(Long.parseLong(list[0]))
-                    .category(StrfCategory.valueOf(list[1]))
-                    .title(list[2])
-                    .lat(Double.parseDouble(list[3]))
-                    .lng(Double.parseDouble(list[4]))
-                    .address(list[5])
-                    .locationId(Long.parseLong(list[6]))
-                    .post(list[7])
-                    .tell(list[8])
-                    .startAt(list[9])
-                    .endAt(list[10])
-                    .open(list[11])
-                    .close(list[12])
-                    .restDate(list[13])
-                    .explain(list[14])
-                    .detail(list[15])
-                    .busiNum(list[17])
+                    .category(StrfCategory.valueOf(list[0]))
+                    .title(list[1])
+                    .lat(Double.parseDouble(list[2]))
+                    .lng(Double.parseDouble(list[3]))
+                    .address(list[4])
+                    .locationId(Long.parseLong(list[5]))
+                    .post(list[6])
+                    .tell(list[7])
+                    .startAt(list[8])
+                    .endAt(list[9])
+                    .open(list[10])
+                    .close(list[11])
+                    .restDate(list[12])
+                    .explain(list[13])
+                    .detail(list[14])
+                    .busiNum(list[16])
                     .build());
         }
-        System.out.println(strfDtoList.get(0));
+        System.out.println(strfDtoList);
     }
 
     private void readBusiNum(List<BusinessNumDto> busiNumList) throws IOException {

@@ -3,14 +3,19 @@
 
 <mapper namespace="com.greenart.security.mapper.ApiMapper">
     <insert id="insStrf">
-        INSERT INTO stay_tour_restaur_fest
-        (strf_id, category, title, lat, lng, address, location_id,
-            post, tell, start_at, end_at, `open`, `close`, rest_date,
-            `explain`, detail, busi_num)
-        VALUES
-        <foreach collection="dtoList" item="item" separator=",">
-            (#{item.strfId}, #{item.category}, #{item.title}, #{item.lat}, #{item.lng}, #{item.address}, #{item.locationId}, #{item.post}, #{item.tell},
-            #{item.startAt}, #{item.endAt}, #{item.open}, #{item.close}, #{item.restDate}, #{item.explain}, #{item.detail}, #{item.busiNum})
+        <foreach collection="dtoList" item="item" separator=";">
+                INSERT INTO stay_tour_restaur_fest
+                (category, title, lat, lng, address, location_id, post, tell,
+                <if test="item.startAt || item.endAt">
+                    start_at, end_at,
+                </if>
+                `open`, `close`, rest_date, `explain`, detail, busi_num)
+                VALUES
+                (#{item.category}, #{item.title}, #{item.lat}, #{item.lng}, #{item.address}, #{item.locationId}, #{item.post}, #{item.tell},
+                <if test="item.startAt || item.endAt">
+                    #{item.startAt}, #{item.endAt},
+                </if>
+                #{item.open}, #{item.close}, #{item.restDate}, #{item.explain}, #{item.detail}, #{item.busiNum})
         </foreach>
     </insert>
 
